@@ -12,8 +12,8 @@ A calculator written in Python for the GUI and using eva for basic computation.
 # TODO:
 INTERACTION:
 - [ ] Add decimal support
-- [x] Add keyboard support
 - [ ] Add backspace support
+- [x] Add keyboard support
 
 FUNCTIONALTIY
 - [ ] graph 
@@ -32,5 +32,5 @@ GUI:
 README:
 - [ ] help 
 - [ ] about
-- [ ] license 
-- [ ] credits 
+- [x] credits 
+- [x] license 
