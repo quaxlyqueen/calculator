@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+echo "Uninstalling..."
+
+sudo rm /usr/share/applications/calculator.desktop
+sudo rm /usr/local/bin/calc
+
+cd ..
+sudo rm -rf calculator
+
+echo "Done!"
