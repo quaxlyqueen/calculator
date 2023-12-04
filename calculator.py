@@ -2,12 +2,12 @@ import tkinter as tk
 import customtkinter as ctk
 import subprocess
 import re
+import os
 
-purple = '#262940'
-hover_purple = '#C6CAED'
-light_purple = '#4D5382'
-white = 'white'
-black = 'black'
+# default colors
+base = '#262940'
+accent = '#4D5382'
+hover = '#C6CAED'
 
 class Button(ctk.CTkButton):
     def __init__(self, parent, text, row, column, command):
@@ -15,14 +15,14 @@ class Button(ctk.CTkButton):
         super().__init__(
             parent,
             text = text,
-            fg_color = purple,
-            text_color = light_purple,
-            bg_color = light_purple,
-            hover_color = hover_purple,
+            fg_color = base,
+            text_color = accent,
+            bg_color = accent,
+            hover_color = hover,
             font=('Lato', 50),
             corner_radius = 20,
             border_width = 10,
-            border_color = light_purple,
+            border_color = accent,
             command = command
         )
         
@@ -39,8 +39,8 @@ class Calculator(ctk.CTk):
         self.geometry("600x850")
         self.resizable(False, False)
         ctk.set_appearance_mode('dark')
-        fg_color = purple
-        bg_color = purple
+        fg_color = base
+        bg_color = base
 
         output = tk.StringVar(value = '')
         display = tk.StringVar(value = '')
@@ -73,8 +73,8 @@ class Calculator(ctk.CTk):
         # This label is the display label
         ctk.CTkLabel(
                 self,
-                fg_color = light_purple,
-                text_color = purple,
+                fg_color = accent,
+                text_color = hover,
                 font=('Lato', 75),
                 textvariable = display,
             ).grid(row=0, column=0, columnspan=6, sticky = 'nsew')
@@ -152,4 +152,23 @@ class Calculator(ctk.CTk):
         self.bind('.', lambda event: self.operation(display, output, '.'))
         self.bind('<Return>', lambda event: self.operation(display, output, '='))
 
+def theme(theme):
+    global base
+    global accent
+    global hover
+    # obtain the user's home directory
+    home = os.path.expanduser('~')
+
+    # Read in the colors from the config file
+    with open(home + '/.config/' + theme, 'r') as f:
+        for line in f:
+            if line.startswith('base'):
+                base = re.search(r'#[0-9A-Fa-f]{6}', line).group(0)
+            elif line.startswith('accent'):
+                accent = re.search(r'#[0-9A-Fa-f]{6}', line).group(0)
+            elif line.startswith('hover'):
+                hover = re.search(r'#[0-9A-Fa-f]{6}', line).group(0)
+
+theme('light_mode.theme')
+#theme('dark_mode.theme')
 Calculator()

@@ -25,9 +25,9 @@ FUNCTIONALTIY
 - [ ] Add settings support
 
 GUI:
-- [ ] Add theme support
 - [ ] Add icon support
 - [ ] Add animation support
+- [x] Add theme support
 
 README:
 - [ ] help 
