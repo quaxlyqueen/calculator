@@ -31,13 +31,20 @@ sudo echo "source $ENV" >> /usr/local/bin/calc
 sudo echo "$COMMAND" >> /usr/local/bin/calc
 sudo chmod +x /usr/local/bin/calc
 
-# Create desktop entry
-sudo echo "[Desktop Entry]" > /usr/share/applications/calc.desktop
-sudo echo "Name=Calculator" >> /usr/share/applications/calc.desktop
-sudo echo "Exec=calc" >> /usr/share/applications/calc.desktop
-sudo echo "Terminal=false" >> /usr/share/applications/calc.desktop
-sudo echo "Icon=$CWD/icon.png" >> /usr/share/applications/calc.desktop
-sudo echo "Type=Application" >> /usr/share/applications/calc.desktop
-sudo echo "Categories=Utility;" >> /usr/share/applications/calc.desktop
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
+    # Create desktop entry
+    sudo echo "[Desktop Entry]" > /usr/share/applications/calc.desktop
+    sudo echo "Name=Calculator" >> /usr/share/applications/calc.desktop
+    sudo echo "Exec=calc" >> /usr/share/applications/calc.desktop
+    sudo echo "Terminal=false" >> /usr/share/applications/calc.desktop
+    sudo echo "Icon=$CWD/icon.png" >> /usr/share/applications/calc.desktop
+    sudo echo "Type=Application" >> /usr/share/applications/calc.desktop
+    sudo echo "Categories=Utility;" >> /usr/share/applications/calc.desktop
+
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "MacOS support not yet implemented."
+    echo "Calculator may be ran currently by running the `calc` command in the terminal."
+fi
 
 echo "Done!"
