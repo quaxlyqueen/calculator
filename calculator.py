@@ -43,7 +43,7 @@ class Calculator(ctk.CTk):
         bg_color = purple
 
         output = tk.StringVar(value = '')
-        display = tk.DoubleVar(value = 0)
+        display = tk.StringVar(value = '')
         
         self.create_layout()
         self.create_widgets(display, output)
@@ -84,19 +84,19 @@ class Calculator(ctk.CTk):
         Button(self, '+/-', 1, 1, lambda: display.set(-display.get()))
         Button(self, '%', 1, 2, lambda: self.operation(display, output, '%'))
         Button(self, '/', 1, 3, lambda: self.operation(display, output, '/'))
-        Button(self, '7', 2, 0, lambda: display.set(display.get() * 10 + 7))
-        Button(self, '8', 2, 1, lambda: display.set(display.get() * 10 + 8))
-        Button(self, '9', 2, 2, lambda: display.set(display.get() * 10 + 9))
+        Button(self, '7', 2, 0, lambda: display.set(display.get() + '7'))
+        Button(self, '8', 2, 1, lambda: display.set(display.get() + '8'))
+        Button(self, '9', 2, 2, lambda: display.set(display.get() + '9'))
         Button(self, 'x', 2, 3, lambda: self.operation(display, output, '*'))
-        Button(self, '4', 3, 0, lambda: display.set(display.get() * 10 + 4))
-        Button(self, '5', 3, 1, lambda: display.set(display.get() * 10 + 5))
-        Button(self, '6', 3, 2, lambda: display.set(display.get() * 10 + 6))
+        Button(self, '4', 3, 0, lambda: display.set(display.get() + '4'))
+        Button(self, '5', 3, 1, lambda: display.set(display.get() + '5'))
+        Button(self, '6', 3, 2, lambda: display.set(display.get() + '6'))
         Button(self, '-', 3, 3, lambda: self.operation(display, output, '-',))
-        Button(self, '1', 4, 0, lambda: display.set((display.get() * 10) + 1))
-        Button(self, '2', 4, 1, lambda: display.set(display.get() * 10 + 2))
-        Button(self, '3', 4, 2, lambda: display.set(display.get() * 10 + 3))
+        Button(self, '1', 4, 0, lambda: display.set(display.get() + '1'))
+        Button(self, '2', 4, 1, lambda: display.set(display.get() + '2'))
+        Button(self, '3', 4, 2, lambda: display.set(display.get() + '3'))
         Button(self, '+', 4, 3, lambda: self.operation(display, output, '+'))
-        Button(self, '0', 5, 0, lambda: display.set(display.get() * 10))
+        Button(self, '0', 5, 0, lambda: display.set(display.get() + '0'))
         Button(self, '.', 5, 1, lambda: self.operation(display, output, '.'))
         Button(self, '=', 5, 2, lambda: self.operation(display, output, '='))
 
@@ -111,11 +111,10 @@ class Calculator(ctk.CTk):
             output.set(output.get() + str(display.get()))
             self.equals(display, output)
         elif op == '.':
-            #display.set(display.get() + 0.0)
-            print('TODO: Add decimal support')
+            display.set(display.get() + '.')
         else:
             output.set(output.get() + str(display.get()) + op)
-            display.set(0)
+            display.set('')
 
     # Uses eva (CLI-tool) to calculate the result.
     def equals(self, display, output):
@@ -135,16 +134,16 @@ class Calculator(ctk.CTk):
 
     # Add keyboard support for numbers and operations
     def add_kbd_keys(self, display, output):
-        self.bind('0', lambda event: display.set(display.get() * 10))
-        self.bind('1', lambda event: display.set(display.get() * 10 + 1))
-        self.bind('2', lambda event: display.set(display.get() * 10 + 2))
-        self.bind('3', lambda event: display.set(display.get() * 10 + 3))
-        self.bind('4', lambda event: display.set(display.get() * 10 + 4))
-        self.bind('5', lambda event: display.set(display.get() * 10 + 5))
-        self.bind('6', lambda event: display.set(display.get() * 10 + 6))
-        self.bind('7', lambda event: display.set(display.get() * 10 + 7))
-        self.bind('8', lambda event: display.set(display.get() * 10 + 8))
-        self.bind('9', lambda event: display.set(display.get() * 10 + 9))
+        self.bind('0', lambda event: display.set(display.get() + '0'))
+        self.bind('1', lambda event: display.set(display.get() + '1'))
+        self.bind('2', lambda event: display.set(display.get() + '2'))
+        self.bind('3', lambda event: display.set(display.get() + '3'))
+        self.bind('4', lambda event: display.set(display.get() + '4'))
+        self.bind('5', lambda event: display.set(display.get() + '5'))
+        self.bind('6', lambda event: display.set(display.get() + '6'))
+        self.bind('7', lambda event: display.set(display.get() + '7'))
+        self.bind('8', lambda event: display.set(display.get() + '8'))
+        self.bind('9', lambda event: display.set(display.get() + '9'))
         self.bind('-', lambda event: self.operation(display, output, '-'))
         self.bind('+', lambda event: self.operation(display, output, '+'))
         self.bind('*', lambda event: self.operation(display, output, '*'))
