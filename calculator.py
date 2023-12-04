@@ -9,34 +9,6 @@ light_purple = '#4D5382'
 white = 'white'
 black = 'black'
 
-'''
-TODO items:
-    INTERACTION:
-        - Add decimal support
-        x Add keyboard support
-        - Add backspace support
-
-    FUNCTIONALTIY
-        - graph 
-        - plot 
-        - matrices
-        - Add history support
-        - Add scientific support
-        - Add unit support
-        - Add settings support
-
-    GUI:
-        - Add theme support
-        - Add icon support
-        - Add animation support
-
-    README:
-        - help 
-        - about
-        - license 
-        - credits 
-'''
-
 class Button(ctk.CTkButton):
     def __init__(self, parent, text, row, column, command):
         # Create and style the buttons.
