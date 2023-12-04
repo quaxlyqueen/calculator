@@ -1,21 +1,52 @@
 #!/bin/zsh
 
+# Script must be ran as root.
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root"
     echo "Try 'sudo ./install'"
     exit 1
 fi
 
+# Check if eva is installed and install it if it isn't
 eva="eva"
 if ! command -v $eva &> /dev/null
 then
-    echo "eva could not be found"
-    echo "Please install eva before running this script"
-    exit 1
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        echo "Installing eva..."
+
+        DISTRO=$(cat /etc/os-release | grep -oP '(?<=^ID=).+' | tr -d '"')
+
+        if [[ $DISTRO == "arch" ]]; then
+            sudo pacman -S eva
+        elif [[ $DISTRO == "archarm" ]]; then
+            sudo pacman -S eva
+        elif [[ $DISTRO == "debian" ]]; then
+            sudo apt install eva
+        elif [[ $DISTRO == "centos" ]]; then
+            sudo yum install eva
+        elif [[ $DISTRO == "fedora" ]]; then
+            sudo dnf install eva
+        elif [[ $DISTRO == "ubuntu" ]]; then
+            sudo apt install eva
+        else
+            echo "Your package manager is not supported"
+            echo "eva could not be found"
+            echo "Please install eva using your package manager before running this script"
+            exit 1
+        fi
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "Installing eva..."
+        brew install eva
+    else
+        echo "eva could not be found"
+        echo "Please install eva before running this script"
+        exit 1
+    fi
 fi
 
 echo "Installing the calculator onto your system..."
 
+# Get the current working directory and the virtual environment
 CWD=$(pwd)
 ENV=$(pwd)/bin/activate
 COMMAND="python $CWD/calculator.py"
@@ -31,8 +62,8 @@ sudo echo "source $ENV" >> /usr/local/bin/calc
 sudo echo "$COMMAND" >> /usr/local/bin/calc
 sudo chmod +x /usr/local/bin/calc
 
+# Add desktop entries (OS specific)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-
     # Create desktop entry
     sudo echo "[Desktop Entry]" > /usr/share/applications/calc.desktop
     sudo echo "Name=Calculator" >> /usr/share/applications/calc.desktop
@@ -43,6 +74,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     sudo echo "Categories=Utility;" >> /usr/share/applications/calc.desktop
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # TODO: Add MacOS support for desktop entry
     echo "MacOS support not yet implemented."
     echo "Calculator may be ran currently by running the `calc` command in the terminal."
 fi
