@@ -38,7 +38,6 @@ class Calculator(ctk.CTk):
         self.title("Calculator")
         self.geometry("600x850")
         self.resizable(False, False)
-        ctk.set_appearance_mode('dark')
         fg_color = base
         bg_color = base
 
@@ -120,12 +119,12 @@ class Calculator(ctk.CTk):
     def equals(self, display, output):
         command = ['eva', str(output.get())]
         result = subprocess.run(command, capture_output = True, text = True)
+
         # remove all commas from the result
         result.stdout = re.sub(r',', '', result.stdout)
 
         self.reset(display, output)
         display.set(self.format(float(result.stdout)))
-        #display.set('{:.2f}'.format(float(result.stdout)))
 
     def format(self, display):
         tmp = int(display)
