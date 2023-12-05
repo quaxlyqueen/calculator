@@ -15,14 +15,16 @@ class Button(ctk.CTkButton):
         super().__init__(
             parent,
             text = text,
-            fg_color = base,
-            text_color = accent,
-            bg_color = accent,
-            hover_color = hover,
             font=('Lato', 50),
             corner_radius = 20,
             border_width = 10,
-            border_color = accent,
+
+            fg_color = accent,
+            bg_color = base,
+            border_color = base,
+            hover_color = base,
+            text_color = hover,
+
             command = command
         )
         
@@ -38,8 +40,8 @@ class Calculator(ctk.CTk):
         self.title("Calculator")
         self.geometry("600x850")
         self.resizable(False, False)
-        fg_color = base
-        bg_color = base
+        #fg_color = base
+        #bg_color = base
 
         output = tk.StringVar(value = '')
         display = tk.StringVar(value = '')
@@ -72,7 +74,7 @@ class Calculator(ctk.CTk):
         # This label is the display label
         ctk.CTkLabel(
                 self,
-                fg_color = accent,
+                fg_color = base,
                 text_color = hover,
                 font=('Lato', 75),
                 textvariable = display,
@@ -171,6 +173,5 @@ def theme(theme):
             elif line.startswith('hover'):
                 hover = re.search(r'#[0-9A-Fa-f]{6}', line).group(0)
 
-#theme('light_mode.theme')
-theme('dark_mode.theme')
+theme('theme/active.theme')
 Calculator()
