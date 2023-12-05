@@ -19,10 +19,10 @@ FUNCTIONALTIY
 - [ ] graph 
 - [ ] plot 
 - [ ] matrices
-- [ ] Add history support
 - [ ] Add scientific support
 - [ ] Add unit support
 - [ ] Add settings support
+- [x] Add history support
 
 GUI:
 - [ ] Add icon support

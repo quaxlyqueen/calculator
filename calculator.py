@@ -120,6 +120,8 @@ class Calculator(ctk.CTk):
     def equals(self, display, output):
         command = ['eva', str(output.get())]
         result = subprocess.run(command, capture_output = True, text = True)
+        # remove all commas from the result
+        result.stdout = re.sub(r',', '', result.stdout)
 
         self.reset(display, output)
         display.set(self.format(float(result.stdout)))
