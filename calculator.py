@@ -151,6 +151,7 @@ class Calculator(ctk.CTk):
         self.bind('/', lambda event: self.operation(display, output, '/'))
         self.bind('.', lambda event: self.operation(display, output, '.'))
         self.bind('<Return>', lambda event: self.operation(display, output, '='))
+        self.bind('<BackSpace>', lambda event: display.set(display.get()[:-1]))
 
 def theme(theme):
     global base
@@ -169,6 +170,6 @@ def theme(theme):
             elif line.startswith('hover'):
                 hover = re.search(r'#[0-9A-Fa-f]{6}', line).group(0)
 
-theme('light_mode.theme')
-#theme('dark_mode.theme')
+#theme('light_mode.theme')
+theme('dark_mode.theme')
 Calculator()
