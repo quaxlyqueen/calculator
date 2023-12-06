@@ -103,8 +103,8 @@ class Calculator(ctk.CTk):
 
     # Clear the display and the string to calculate
     def reset(self, display, output):
-        display.set(0)
-        output.set(0)
+        display.set('')
+        output.set('')
 
     # Adds the operation character to the string to calculate. If the operation is '=', then finalize the string and perform the calculation
     def operation(self, display, output, op):
