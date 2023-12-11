@@ -38,7 +38,7 @@ class Calculator(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Calculator")
-        self.geometry("600x850")
+        self.set_size()
         self.resizable(False, False)
         #fg_color = base
         #bg_color = base
@@ -52,6 +52,19 @@ class Calculator(ctk.CTk):
         self.add_kbd_keys(display, output)
 
         self.mainloop()
+
+    # Determine and set the proper size of the calculator given the screen resolution
+    def set_size(self):
+        # Get the screen resolution
+        width = self.winfo_screenwidth()
+        height = self.winfo_screenheight()
+
+        # Calculate the window size
+        window_width = int(width * 0.225)
+        window_height = int(height * 0.55)
+
+        # Set the calculator size
+        self.geometry(f"{window_width}x{window_height}")
 
     # Create the grid layout.
     def create_layout(self):
