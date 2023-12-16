@@ -9,6 +9,8 @@ fi
 
 # Check if eva is installed and install it if it isn't
 eva="eva"
+brew="brew"
+port="port"
 if ! command -v $eva &> /dev/null
 then
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -36,7 +38,17 @@ then
         fi
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Installing eva..."
-        brew install eva
+
+        if command -v $brew &> /dev/null
+        then
+            brew install eva
+        elif command -v $port &> /dev/null
+        then
+            port install eva
+        else
+            echo "Neither HomeBrew or MacPorts are installed. Please install either before running this script."
+            exit 1
+        fi
     else
         echo "eva could not be found"
         echo "Please install eva before running this script"
