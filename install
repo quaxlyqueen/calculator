@@ -91,4 +91,23 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Calculator may be ran currently by running the `calc` command in the terminal."
 fi
 
+if ! -d ~/.config
+then
+    mkdir ~/.config
+fi
+
+if ! -d ~/.config/theme 
+then
+    mkdir ~/.config/theme 
+
+    theme_dir="~/.config/theme/"
+
+    touch theme_dir/active.theme
+
+    echo "base=#C6CAED" > theme_dir/active.theme
+    echo "accent=#4D5382" >> theme_dir/active.theme
+    echo "hover=#262940" >> theme_dir/active.theme
+fi
+
 echo "Done!"
+echo "Customize the calculator through a global theme file located at ~/.config/theme/active.theme"
