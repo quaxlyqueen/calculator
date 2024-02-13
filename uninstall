@@ -44,7 +44,7 @@ echo "Uninstalling the calculator from your system..."
 
 # Uninstall desktop entries (OS specific)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo rm /usr/share/applications/calc.desktop
+    sudo rm /usr/share/applications/calculator.desktop
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # TODO: Add desktop entry uninstallation for macOS
     echo "Desktop entry installation/uninstallation for macOS is not supported yet"
